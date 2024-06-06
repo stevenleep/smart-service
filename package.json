@@ -1,0 +1,46 @@
+{
+  "name": "@stevenleep/smart-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "commonjs": "lib/index.cjs.js",
+  "types": "lib/index.d.ts",
+  "repository": "https://github.com/stevenleep/smart-api",
+  "files": [
+    "lib/**/*"
+  ],
+  "scripts": {
+    "preinstall": "npx only-allow pnpm && cp .npmrc.bak .npmrc",
+    "build": "rollup -c",
+    "publish:pkg": "pnpm build && sh ./scripts/release.sh"
+  },
+  "keywords": [],
+  "author": {
+    "name": "stevenleep",
+    "email": "dev@wclound.cn",
+    "url": "https://www.github.com/stevenleep"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.18.13",
+    "@babel/preset-env": "^7.18.10",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/jest": "^28.1.8",
+    "@types/node": "^18.7.13",
+    "jest": "^29.0.0",
+    "rollup": "^2.78.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-dts": "^4.2.2",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.33.0",
+    "ts-jest": "^28.0.8",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.0",
+    "typedoc": "^0.23.11",
+    "typescript": "^4.8.2"
+  }
+}
