@@ -3,3 +3,5 @@ export default class SmartAPI {
     console.log("SmartAPI constructor");
   }
 }
+
+export function createSmartAPIServices() {}

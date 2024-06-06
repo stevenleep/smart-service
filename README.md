@@ -22,18 +22,13 @@ yarn add @stevenleep/smart-api
 ## Usage
 
 ```typescript
-import { createServicesFactory } from "@stevenleep/smart-api";
+import { createSmartAPIServices } from "@stevenleep/smart-api";
 
 const api = {
-    getApps: "/applications", // GET /applications
-
-    createApp: { // POST /applications/create
-        url: "/applications/create",
-        method: "POST"
-    }
+    getApps: "/applications",
 };
 
-const appServices = createServicesFactory(api);
-
+const appServices = createSmartAPIServices(api);
+// GET /applications
 appServices.getApps();
 ```
