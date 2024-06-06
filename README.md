@@ -1,6 +1,7 @@
-# Smart API
+![smart-api](./smart-api.svg) 
 
-**Smart API** is an innovative library that generates JavaScript API request functions through description files and JSON configurations. It provides an efficient solution for front-end developers, simplifying the coding of the Service layer and enhancing overall development efficiency.
+# Smart API
+**Smart API** is an innovative library that generates JavaScript API request functions through description files and JSON configurations. 
 
 ## Features
 
@@ -16,3 +17,23 @@ You can install it using pnpm or yarn:
 pnpm add @stevenleep/smart-api
 # or
 yarn add @stevenleep/smart-api
+```
+
+## Usage
+
+```typescript
+import { createServicesFactory } from "@stevenleep/smart-api";
+
+const api = {
+    getApps: "/applications", // GET /applications
+
+    createApp: { // POST /applications/create
+        url: "/applications/create",
+        method: "POST"
+    }
+};
+
+const appServices = createServicesFactory(api);
+
+appServices.getApps();
+```
