@@ -1,5 +1,6 @@
 declare class SmartAPI {
     constructor();
 }
+declare function createSmartAPIServices(): void;
 
-export { SmartAPI as default };
+export { createSmartAPIServices, SmartAPI as default };
