@@ -15,9 +15,9 @@
 
       const { createServices } = new LooseServices(axiosInstance);
       const services = createServices({
-        getUserProfile: "/posts",
+        getPosts: "/posts",
       });
-      services.getUserProfile().then((res) => {
+      services.getPosts().then((res) => {
         console.log(res);
       });
     </script>
