@@ -22,19 +22,18 @@ yarn add @stevenleep/smart-service
 ## Usage
 ```typescript
 import { ProxyService } from "@stevenleep/smart-service";
-// Your request instance
+
+// Create an axios instance
+import axios from "axios";
 const axiosInstance = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com",
 });
-// connect to your request instance
+
+// connect axiosInstance to ProxyService
 const { createServices } = new ProxyService(axiosInstance);
+const postServices = createServices({ getPosts: "/posts" });
 
-// Your API configuration
-const postServices = createServices({
-  getPosts: "/posts",
-});
-
-// send request
+// Call the getPosts function to get the data from the server side
 postServices.getPosts().then((res) => {
   console.log(res);
 });
@@ -45,27 +44,14 @@ If you need to use the `createServices` API in an IE environment, you can use `L
 > Compared with ProxyService mode, LooseService mode uses `Reflect.defineProperty` to create request functions.
 ```typescript
 import { LooseService } from "@stevenleep/smart-service";
-// Your request instance
-const axiosInstance = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com",
-});
-// connect to your request instance
+const axiosInstance = ...;
 const { createServices } = new LooseService(axiosInstance);
-
-// Your API configuration
-const postServices = createServices({
-  getPosts: "/posts",
-});
-
-// send request
-postServices.getPosts().then((res) => {
-  console.log(res);
-});
 ```
+
+## API
+- [For more usage, view the API documentation](https://github.com/stevenleep/smart-service/blob/main/docs/apis.md)
+
 
 ## Examples
 - [LooseServices Simple Demo](https://github.com/stevenleep/smart-service/blob/main/examples/loose-services-simple.html)
 - [ProxyServices Simple Demo](https://github.com/stevenleep/smart-service/blob/main/examples/proxy-services-simple.html)
-
-## API
-- [For more usage, view the API documentation](https://github.com/stevenleep/smart-service/blob/main/docs/apis.md)
