@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <script src="https://unpkg.com/axios@1.7.2/dist/axios.js"></script>
+  <body>
+    <script type="module">
+      import { ProxyServices } from "../lib/index.esm.js";
+      const axiosInstance = axios.create({
+        baseURL: "https://jsonplaceholder.typicode.com",
+      });
+
+      const { createServices } = new ProxyServices(axiosInstance);
+      const services = createServices({
+        getUserProfile: "/posts",
+      });
+      services.getUserProfile().then((res) => {
+        console.log(res);
+      });
+    </script>
+  </body>
+</html>

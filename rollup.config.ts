@@ -46,10 +46,12 @@ const buildBaseConfig = {
 };
 const dtsBaseConfig = {
   input: "src/index.ts",
-  output: [{
-    file: pkg.types,
-    format: "es",
-  }],
+  output: [
+    {
+      file: pkg.types,
+      format: "es",
+    },
+  ],
   plugins: [dts()],
 };
 
