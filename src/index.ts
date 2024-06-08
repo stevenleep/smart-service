@@ -1,3 +1,4 @@
-export * from "./ProxyServices";
-export * from "./LooseServices";
+export * from "./ProxyService";
+export * from "./LooseService";
 export * from "./interface";
+export * from "./helper";

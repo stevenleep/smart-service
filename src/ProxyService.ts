@@ -1,65 +1,50 @@
 import {
   ServiceConstructorOptions,
-  DefaultServiceConfigs,
-  ServiceConfig,
+  DefaultServicesConfigMaps,
 } from "./interface";
 import {
   getRequestInstance,
   createRequestFunction,
-  getNamespacePath,
+  safeServiceConfig,
+  getRequestPath,
 } from "./helper";
 
-function createProxy<
-  UserServiceConfigs extends DefaultServiceConfigs = DefaultServiceConfigs,
+export function createProxy<
+  UserServicesConfigMaps extends DefaultServicesConfigMaps = DefaultServicesConfigMaps,
   Options extends ServiceConstructorOptions = ServiceConstructorOptions
 >(
-  serviceConfigs: UserServiceConfigs,
+  servicesConfigMaps: UserServicesConfigMaps,
   rootInstance,
   options: Options = {} as Options
 ) {
-  return new Proxy(serviceConfigs, {
-    get(target, prop, receiver) {
+  return new Proxy(servicesConfigMaps, {
+    get(target, prop) {
       if (prop in target) {
-        let serviceConfig = Reflect.get(target, prop, receiver);
-        
-        if (typeof serviceConfig === "string") {
-          // @ts-ignore
-          serviceConfig = {
-            path: serviceConfig,
-            method: options.defaultMethod || "get",
-            namespace: "default",
-          } as unknown as ServiceConfig;
-        }
+        const serviceConfig = safeServiceConfig(
+          target,
+          prop as string,
+          options
+        );
 
         const requestInstance = getRequestInstance(rootInstance, serviceConfig);
-
-        // 获取命名空间路径
-        const namespacePath = serviceConfig.namespace
-          ? getNamespacePath(options.namespaces || {}, serviceConfig.namespace)
-          : getNamespacePath(options.namespaces || {}, "default") || "";
-        const requestPath = `${namespacePath}${serviceConfig.path}`;
-
         return createRequestFunction(requestInstance, {
           ...serviceConfig,
-          path: requestPath,
+          path: getRequestPath(options, serviceConfig),
           method: serviceConfig.method || options.defaultMethod || "get",
         });
       }
-
       throw new Error(`Service ${String(prop)} not found`);
     },
-
     set(target, prop, value, receiver) {
       throw new Error(`Service ${String(prop)} cannot be set`);
     },
-
     deleteProperty(target, prop) {
       throw new Error(`Service ${String(prop)} cannot be deleted`);
     },
   });
 }
 
-export class ProxyServices {
+export class ProxyService {
   constructor(
     private readonly rootInstance: any,
     private readonly options: ServiceConstructorOptions = {}
@@ -67,13 +52,12 @@ export class ProxyServices {
     if (!rootInstance) {
       throw new Error("Root Instance not found");
     }
-
     this.createServices = this.createServices.bind(this);
   }
 
   public createServices<
-    UserServiceConfigs extends DefaultServiceConfigs = DefaultServiceConfigs
-  >(serviceConfigs: UserServiceConfigs = {} as UserServiceConfigs) {
+    UserServicesConfigMaps extends DefaultServicesConfigMaps = DefaultServicesConfigMaps
+  >(serviceConfigs: UserServicesConfigMaps = {} as UserServicesConfigMaps) {
     return createProxy(serviceConfigs, this.rootInstance, this.options);
   }
 }

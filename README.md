@@ -1,6 +1,4 @@
-![smart-api](./smart-api.svg)
-
-# Smart API
+# Smart service
 
 Simplify the writing of Javascript front-end Service layer code by using json configuration..
 
@@ -16,21 +14,20 @@ Simplify the writing of Javascript front-end Service layer code by using json co
 You can install it using pnpm or yarn:
 
 ```bash
-pnpm add @stevenleep/smart-api
+pnpm add @stevenleep/smart-service
 # or
-yarn add @stevenleep/smart-api
+yarn add @stevenleep/smart-service
 ```
-
 
 ## Usage
 ```typescript
-import { ProxyServices } from "@stevenleep/smart-api";
+import { ProxyService } from "@stevenleep/smart-service";
 // Your request instance
 const axiosInstance = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com",
 });
 // connect to your request instance
-const { createServices } = new ProxyServices(axiosInstance);
+const { createServices } = new ProxyService(axiosInstance);
 
 // Your API configuration
 const postServices = createServices({
@@ -44,16 +41,16 @@ postServices.getPosts().then((res) => {
 ```
 
 ## Use in IE
-If you need to use the `createServices` API in an IE environment, you can use `LooseServices` initialization.
-> Compared with ProxyServices mode, LooseServices mode uses `Reflect.defineProperty` to create request functions.
+If you need to use the `createServices` API in an IE environment, you can use `LooseService` initialization.
+> Compared with ProxyService mode, LooseService mode uses `Reflect.defineProperty` to create request functions.
 ```typescript
-import { LooseServices } from "@stevenleep/smart-api";
+import { LooseService } from "@stevenleep/smart-service";
 // Your request instance
 const axiosInstance = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com",
 });
 // connect to your request instance
-const { createServices } = new LooseServices(axiosInstance);
+const { createServices } = new LooseService(axiosInstance);
 
 // Your API configuration
 const postServices = createServices({
@@ -67,8 +64,8 @@ postServices.getPosts().then((res) => {
 ```
 
 ## Examples
-- [LooseServices Simple Demo](./examples/loose-services-simple.html)
-- [ProxyServices Simple Demo](./examples/proxy-services-simple.html)
+- [LooseServices Simple Demo](https://github.com/stevenleep/smart-service/blob/main/examples/loose-services-simple.html)
+- [ProxyServices Simple Demo](https://github.com/stevenleep/smart-service/blob/main/examples/proxy-services-simple.html)
 
 ## API
-- [For more usage, view the API documentation](./docs//apis.md)
+- [For more usage, view the API documentation](https://github.com/stevenleep/smart-service/blob/main/docs/apis.md)

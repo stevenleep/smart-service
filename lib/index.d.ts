@@ -43,21 +43,34 @@ type ServiceConfig = {
      */
     instance?: any;
 };
-type DefaultServiceConfigs = Record<string, ServiceConfig | string>;
+type DefaultServicesConfigMaps = Record<string, ServiceConfig | string>;
 
-declare class ProxyServices {
+declare function createProxy<UserServicesConfigMaps extends DefaultServicesConfigMaps = DefaultServicesConfigMaps, Options extends ServiceConstructorOptions = ServiceConstructorOptions>(servicesConfigMaps: UserServicesConfigMaps, rootInstance: any, options?: Options): UserServicesConfigMaps;
+declare class ProxyService {
     private readonly rootInstance;
     private readonly options;
     constructor(rootInstance: any, options?: ServiceConstructorOptions);
-    createServices<UserServiceConfigs extends DefaultServiceConfigs = DefaultServiceConfigs>(serviceConfigs?: UserServiceConfigs): UserServiceConfigs;
+    createServices<UserServicesConfigMaps extends DefaultServicesConfigMaps = DefaultServicesConfigMaps>(serviceConfigs?: UserServicesConfigMaps): UserServicesConfigMaps;
 }
 
-declare function createProxy<UserServiceConfigs extends DefaultServiceConfigs = DefaultServiceConfigs, Options extends ServiceConstructorOptions = ServiceConstructorOptions>(serviceConfigs: UserServiceConfigs, rootInstance: any, options?: Options): {};
-declare class LooseServices {
+declare function createLooseProxy<UserServicesConfigMaps extends DefaultServicesConfigMaps = DefaultServicesConfigMaps, Options extends ServiceConstructorOptions = ServiceConstructorOptions>(servicesConfigMaps: UserServicesConfigMaps, rootInstance: any, options?: Options): {};
+declare class LooseService {
     private readonly rootInstance;
     private readonly options;
     constructor(rootInstance: any, options?: ServiceConstructorOptions);
-    createServices<UserServiceConfigs extends DefaultServiceConfigs = DefaultServiceConfigs>(serviceConfigs?: UserServiceConfigs): {};
+    createServices<UserServiceConfigs extends DefaultServicesConfigMaps = DefaultServicesConfigMaps>(serviceConfigs?: UserServiceConfigs): {};
 }
 
-export { DefaultServiceConfigs, LooseServices, ProxyServices, RequestMethods, ServiceConfig, ServiceConstructorOptions, SupportedRequestMethods, createProxy };
+declare function getRequestInstance(rootInstance: any, options: ServiceConfig): any;
+declare function getNamespacePath(namespaces: string | Record<string, string>, namespaceName: string): string;
+/**
+ * 创建请求函数
+ */
+declare function createRequestFunction(requestInstance: any, serviceConfig: Omit<ServiceConfig, "method"> & {
+    method: SupportedRequestMethods;
+}): <Params extends any[] = any[], ResultType = any>(...args: Params) => Promise<ResultType>;
+declare function getRequestPath(options: ServiceConstructorOptions, serviceConfig: ServiceConfig): string;
+declare function createDefaultServiceConfig(serviceConfig: ServiceConfig | string, options: ServiceConstructorOptions): ServiceConfig;
+declare function safeServiceConfig(serviceConfigMaps: DefaultServicesConfigMaps, key: string, options: ServiceConstructorOptions): ServiceConfig;
+
+export { DefaultServicesConfigMaps, LooseService, ProxyService, RequestMethods, ServiceConfig, ServiceConstructorOptions, SupportedRequestMethods, createDefaultServiceConfig, createLooseProxy, createProxy, createRequestFunction, getNamespacePath, getRequestInstance, getRequestPath, safeServiceConfig };

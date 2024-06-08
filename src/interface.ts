@@ -71,4 +71,4 @@ export type ServiceConfig = {
   instance?: any;
 };
 
-export type DefaultServiceConfigs = Record<string, ServiceConfig | string>;
+export type DefaultServicesConfigMaps = Record<string, ServiceConfig | string>;
