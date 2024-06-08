@@ -52,4 +52,12 @@ declare class ProxyServices {
     createServices<UserServiceConfigs extends DefaultServiceConfigs = DefaultServiceConfigs>(serviceConfigs?: UserServiceConfigs): UserServiceConfigs;
 }
 
-export { DefaultServiceConfigs, ProxyServices, RequestMethods, ServiceConfig, ServiceConstructorOptions, SupportedRequestMethods };
+declare function createProxy<UserServiceConfigs extends DefaultServiceConfigs = DefaultServiceConfigs, Options extends ServiceConstructorOptions = ServiceConstructorOptions>(serviceConfigs: UserServiceConfigs, rootInstance: any, options?: Options): {};
+declare class LooseServices {
+    private readonly rootInstance;
+    private readonly options;
+    constructor(rootInstance: any, options?: ServiceConstructorOptions);
+    createServices<UserServiceConfigs extends DefaultServiceConfigs = DefaultServiceConfigs>(serviceConfigs?: UserServiceConfigs): {};
+}
+
+export { DefaultServiceConfigs, LooseServices, ProxyServices, RequestMethods, ServiceConfig, ServiceConstructorOptions, SupportedRequestMethods, createProxy };

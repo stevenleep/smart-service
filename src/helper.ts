@@ -1,7 +1,7 @@
 import { ServiceConfig, SupportedRequestMethods } from "./interface";
 
 export function getRequestInstance(rootInstance: any, options: ServiceConfig) {
-  if (options.instance) {
+  if (options?.instance) {
     return options.instance;
   }
 
