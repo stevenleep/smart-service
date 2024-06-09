@@ -2,7 +2,9 @@
 
 Simplify the writing of Javascript front-end Service layer code by using json configuration..
 
-https://github.com/stevenleep/smart-service/assets/106362981/2b98ec30-6601-448a-a589-891d4b195873
+
+https://github.com/stevenleep/smart-service/assets/106362981/c97b6041-7efd-4906-ab02-dc428840534a
+
 
 ## Features
 
