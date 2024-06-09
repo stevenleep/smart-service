@@ -14,7 +14,7 @@ export function createProxy<
   Options extends ServiceConstructorOptions = ServiceConstructorOptions
 >(
   servicesConfigMaps: UserServicesConfigMaps,
-  rootInstance,
+  rootInstance: any,
   options: Options = {} as Options
 ) {
   return new Proxy(servicesConfigMaps, {

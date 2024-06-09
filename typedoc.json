@@ -1,0 +1,7 @@
+{
+  "entryPoints": ["./src/index.ts"],
+  "entryPointStrategy": "expand",
+  "out": "docs/api",
+  "includeVersion": true,
+  "exclude": ["./src/__test__/**/*"]
+}

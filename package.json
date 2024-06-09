@@ -1,7 +1,7 @@
 {
   "name": "@stevenleep/smart-service",
-  "version": "1.1.0",
-  "description": "",
+  "version": "1.1.1",
+  "description": "Simplify the writing of Javascript front-end Service layer code by using json configuration.",
   "private": false,
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
@@ -14,7 +14,8 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm && cp .npmrc.bak .npmrc",
     "build": "rollup -c",
-    "publish:pkg": "pnpm build && sh ./scripts/release.sh"
+    "publish:pkg": "pnpm doc && pnpm build && sh ./scripts/release.sh",
+    "doc": "typedoc --options ./typedoc.json"
   },
   "keywords": [],
   "author": {
