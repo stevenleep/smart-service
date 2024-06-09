@@ -72,3 +72,12 @@ export type ServiceConfig = {
 };
 
 export type DefaultServicesConfigMaps = Record<string, ServiceConfig | string>;
+
+export type AnyRequestFunction = (...args: any[]) => Promise<any>;
+
+export type ReturnTypes<
+  ServicesConfigMaps extends DefaultServicesConfigMaps = DefaultServicesConfigMaps,
+  Keys extends keyof ServicesConfigMaps = keyof ServicesConfigMaps
+> = {
+  [key in Keys]: AnyRequestFunction
+};

@@ -1,6 +1,8 @@
 import {
   ServiceConstructorOptions,
   DefaultServicesConfigMaps,
+  ReturnTypes,
+  AnyRequestFunction,
 } from "./interface";
 import {
   getRequestInstance,
@@ -16,7 +18,7 @@ export function createProxy<
   servicesConfigMaps: UserServicesConfigMaps,
   rootInstance: any,
   options: Options = {} as Options
-) {
+): ReturnTypes<UserServicesConfigMaps> {
   return new Proxy(servicesConfigMaps, {
     get(target, prop) {
       if (prop in target) {
@@ -31,7 +33,7 @@ export function createProxy<
           ...serviceConfig,
           path: getRequestPath(options, serviceConfig),
           method: serviceConfig.method || options.defaultMethod || "get",
-        });
+        }) as AnyRequestFunction;
       }
       throw new Error(`Service ${String(prop)} not found`);
     },
@@ -41,7 +43,7 @@ export function createProxy<
     deleteProperty(target, prop) {
       throw new Error(`Service ${String(prop)} cannot be deleted`);
     },
-  });
+  }) as unknown as ReturnTypes<UserServicesConfigMaps>;
 }
 
 export class ProxyService {

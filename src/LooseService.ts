@@ -6,6 +6,7 @@ import {
 } from "./helper";
 import {
   DefaultServicesConfigMaps,
+  ReturnTypes,
   ServiceConstructorOptions,
 } from "./interface";
 
@@ -16,7 +17,7 @@ export function createLooseProxy<
   servicesConfigMaps: UserServicesConfigMaps,
   rootInstance: any,
   options: Options = {} as Options
-) {
+): ReturnTypes<UserServicesConfigMaps> {
   return Object.keys(servicesConfigMaps).reduce((acc, key) => {
     const serviceConfig = safeServiceConfig(servicesConfigMaps, key, options);
     const requestInstance = getRequestInstance(rootInstance, serviceConfig);
@@ -36,7 +37,7 @@ export function createLooseProxy<
     });
 
     return acc;
-  }, {});
+  }, {} as ReturnTypes<UserServicesConfigMaps>);
 }
 
 export class LooseService {

@@ -1,6 +1,6 @@
 {
   "name": "@stevenleep/smart-service",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Simplify the writing of Javascript front-end Service layer code by using json configuration.",
   "private": false,
   "main": "lib/index.js",
