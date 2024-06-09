@@ -55,3 +55,7 @@ const { createServices } = new LooseService(axiosInstance);
 ## Examples
 - [LooseServices Simple Demo](https://github.com/stevenleep/smart-service/blob/main/examples/loose-services-simple.html)
 - [ProxyServices Simple Demo](https://github.com/stevenleep/smart-service/blob/main/examples/proxy-services-simple.html)
+
+## Contributing
+- [Contributing Guide](https://github.com/stevenleep/smart-service/blob/main/docs/contributing.md)
+- [Publish Guide](https://github.com/stevenleep/smart-service/blob/main/docs/publish.md)

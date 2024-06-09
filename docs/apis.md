@@ -3,21 +3,21 @@
 ## Declare
 
 ```typescript
-declare class ProxyServices {
+declare class ProxyService {
   private readonly rootInstance;
   private readonly options;
   constructor(rootInstance: any, options?: ServiceConstructorOptions);
   createServices<
-    UserServiceConfigs extends DefaultServiceConfigs = DefaultServiceConfigs
-  >(serviceConfigs?: UserServiceConfigs): UserServiceConfigs;
+    UserServicesConfigMaps extends DefaultServicesConfigMaps = DefaultServicesConfigMaps
+  >(serviceConfigs?: UserServicesConfigMaps): UserServicesConfigMaps;
 }
 
-declare class LooseServices {
+declare class LooseService {
   private readonly rootInstance;
   private readonly options;
   constructor(rootInstance: any, options?: ServiceConstructorOptions);
   createServices<
-    UserServiceConfigs extends DefaultServiceConfigs = DefaultServiceConfigs
+    UserServiceConfigs extends DefaultServicesConfigMaps = DefaultServicesConfigMaps
   >(serviceConfigs?: UserServiceConfigs): {};
 }
 ```
@@ -55,6 +55,7 @@ export type ServiceConstructorOptions<
 ````
 
 ## createServices
+
 ```typescript
 type ServiceConfig = {
   /**
