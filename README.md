@@ -2,6 +2,8 @@
 
 Simplify the writing of Javascript front-end Service layer code by using json configuration..
 
+https://github.com/stevenleep/smart-service/assets/106362981/2b98ec30-6601-448a-a589-891d4b195873
+
 ## Features
 
 - [x] Automatically generate API request functions through simple JSON configuration.
