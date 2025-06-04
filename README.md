@@ -1,10 +1,16 @@
-# Smart service
+## Purpose and Scope
 
-Simplify the writing of Javascript front-end Service layer code by using json configuration..
+This document provides a high-level introduction to the @stevenleep/smart-service library, explaining its core purpose, architecture, and key components. It covers the fundamental concepts of how the library transforms JSON configuration into executable API request functions using two different proxy strategies.
 
+For detailed configuration options, see [Configuration System.](https://deepwiki.com/stevenleep/smart-service/3.3-configuration-system) For implementation specifics of each proxy strategy, see [ProxyService](https://deepwiki.com/stevenleep/smart-service/3.1-proxyservice) and [LooseService](https://deepwiki.com/stevenleep/smart-service/3.2-looseservice).
 
 https://github.com/stevenleep/smart-service/assets/106362981/c97b6041-7efd-4906-ab02-dc428840534a
 
+## What is Smart Service
+
+Smart Service is a TypeScript library that automatically generates API request functions from simple JSON configuration. Instead of manually writing repetitive service layer code, developers define their API endpoints in JSON format and the library creates type-safe, executable request functions.
+
+The library is HTTP client agnostic - it works with any request library (axios, fetch, custom clients) by accepting a "root instance" that handles the actual HTTP requests. The core innovation is using JavaScript's proxy mechanisms to dynamically create request functions at runtime.
 
 ## Features
 
